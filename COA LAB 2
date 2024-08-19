@@ -1,0 +1,86 @@
+1. Write an assembly language program to perform addition of 8-bit data.
+Code:
+org 100h
+num1 db 16h
+num2 db 7h
+start:
+mov al, num1
+add al, num2
+mov bl,al
+mov ah,al
+and ah,0F0h
+shr ah,4
+add ah,30h
+cmp ah,39h
+jle print_first_digit
+add ah,7
+print_first_digit:
+mov dl,ah
+mov ah, 02h
+int 21h
+mov ah,bl
+and ah,0Fh
+add ah,30h
+cmp ah,39h
+jle print_second_digit
+add ah,7
+print_second_digit:
+mov dl,ah
+mov ah,02h
+int 21h
+ret
+
+
+2. Write a program in assembly language to perform addition of 16-bit data.
+Code:
+org 100h
+num1 dw 1567h ; First 16-bit number
+num2 dw 5743h ; Second 16-bit number
+start:
+mov ax, num1
+add ax, num2
+mov bx, ax
+mov al, ah
+and al, 0F0h
+shr al, 4
+add al, 30h
+cmp al, 39h
+jle print_first_digit
+add al, 7
+print_first_digit:
+mov dl, al
+mov ah, 02h
+int 21h
+mov al, bh
+and al, 0Fh
+add al, 30h
+cmp al, 39h
+jle print_second_digit
+add al, 7
+print_second_digit:
+mov dl, al
+mov ah, 02h
+int 21h
+mov al, bl
+and al, 0F0h
+shr al, 4
+add al, 30h
+cmp al, 39h
+jle print_third_digit
+add al, 7
+print_third_digit:
+mov dl, al
+mov ah, 02h
+int 21h
+mov al, bl
+and al, 0Fh
+add al, 30h
+cmp al, 39h
+jle print_fourth_digit
+add al, 7
+print_fourth_digit:
+mov dl, al
+mov ah, 02h
+int 21h
+mov ah, 4Ch
+int 21h
